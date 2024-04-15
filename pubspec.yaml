@@ -1,0 +1,34 @@
+name: nurmukhammed_s_application4
+description: A new Flutter project.
+version: 1.0.0+1
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cached_network_image: ^3.3.0
+  flutter_svg: ^2.0.9
+  flutter_svg_provider: ^1.0.4
+  intl: ^0.18.0
+  http: ^1.1.0
+  flutter_secure_storage: ^4.2.1
+  curved_navigation_bar: ^1.0.3
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+  fonts:
+    - family: Cormorant Garamond
+      fonts:
+        - asset: assets/fonts/CormorantGaramondBold.ttf
+          weight: 700
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/PoppinsBold.ttf
+          weight: 700
+        - asset: assets/fonts/PoppinsRegular.ttf
+          weight: 400
