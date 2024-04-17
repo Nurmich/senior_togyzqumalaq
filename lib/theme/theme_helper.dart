@@ -104,6 +104,7 @@ class ColorSchemes {
 class PrimaryColors {
   // Black
   Color get black900 => Color(0XFF030303);
+  Color get black901 => Color(0XFF000000);
   Color get black90033 => Color(0X33000000);
 
   // Blue

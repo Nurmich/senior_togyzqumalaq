@@ -9,6 +9,9 @@ class AppDecoration {
   static BoxDecoration get fillWhiteA => BoxDecoration(
         color: appTheme.whiteA70001,
       );
+       static BoxDecoration get fillWhiteA1 => BoxDecoration(
+        color: appTheme.whiteA700.withOpacity(0.16),
+      );
 
   // Gradient decorations
   static BoxDecoration get gradientOrangeAToRed => BoxDecoration(

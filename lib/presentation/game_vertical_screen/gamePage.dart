@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:nurmukhammed_s_application4/widgets/app_bar/custom_app_bar.dart';
+import 'package:nurmukhammed_s_application4/widgets/app_bar2/custom_app_bar.dart';
 import 'package:nurmukhammed_s_application4/widgets/app_bar/appbar_leading_image.dart';
 import 'package:nurmukhammed_s_application4/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -267,7 +268,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
         margin: EdgeInsets.only(left: 5.h, top: 11.v),
         decoration: BoxDecoration(
           color: tuzdyq[0] != index
-              ? appTheme.black900.withOpacity(0.1)
+              ? appTheme.black901.withOpacity(0.1)
               : Color.fromARGB(255, 255, 0, 0),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(2.h),
@@ -334,7 +335,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
         margin: EdgeInsets.only(left: 5.h, top: 11.v),
         decoration: BoxDecoration(
           color: tuzdyq[1] != index
-              ? appTheme.black900.withOpacity(0.1)
+              ? appTheme.black901.withOpacity(0.1)
               : Color.fromARGB(255, 255, 0, 0),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(2.h),
@@ -396,12 +397,13 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0XFFC57941),
       appBar: _buildAppBar(context),
       body: SizedBox(
         width: SizeUtils.width,
         child: SingleChildScrollView(
           child: SizedBox(
-            height: 925.v,
+            height: 735.v,
             width: double.maxFinite,
             child: Stack(
               alignment: Alignment.bottomRight,
@@ -409,23 +411,23 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                 CustomImageView(
                   imagePath: ImageConstant.imgRectangle556,
                   height: 545.v,
-                  width: 390.h,
+                  width: SizeUtils.width,
                   alignment: Alignment.bottomCenter,
-                  margin: EdgeInsets.only(bottom: 166.v),
+                  margin: EdgeInsets.only(bottom: 0.v),
                 ),
                 Opacity(
                   opacity: 0.5,
                   child: CustomImageView(
                     imagePath: ImageConstant.imgEllipse1,
                     height: 380.v,
-                    width: 225.h,
+                    width: SizeUtils.width,
                     alignment: Alignment.bottomRight,
                   ),
                 ),
                 Align(
                   alignment: Alignment.topCenter,
                   child: SizedBox(
-                    height: 700.v,
+                    height: 735.v,
                     width: double.maxFinite,
                     child: Stack(
                       alignment: Alignment.bottomCenter,
@@ -457,7 +459,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                 horizontal: 1.h,
                                 vertical: 10.v,
                               ),
-                              decoration: AppDecoration.fillWhiteA.copyWith(
+                              decoration: AppDecoration.fillWhiteA1.copyWith(
                                 borderRadius: BorderRadiusStyle.roundedBorder16,
                               ),
                               child: Stack(
@@ -468,10 +470,10 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                     child: Container(
                                       height: 525.v,
                                       width: 52.h,
-                                      margin: EdgeInsets.only(right: 135.h),
+                                      margin: EdgeInsets.only(right: 145.h),
                                       decoration: BoxDecoration(
-                                        color:
-                                            appTheme.black900.withOpacity(0.1),
+                                        
+                                        color: appTheme.black901.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(
                                           15.h,
                                         ),
@@ -505,10 +507,10 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                     child: Container(
                                       height: 525.v,
                                       width: 52.h,
-                                      margin: EdgeInsets.only(left: 135.h),
+                                      margin: EdgeInsets.only(left: 150.h),
                                       decoration: BoxDecoration(
                                         color:
-                                            appTheme.black900.withOpacity(0.1),
+                                            appTheme.black901.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(
                                           15.h,
                                         ),
@@ -631,8 +633,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(
-                                      left: 262.h,
-                                      right: 118.h,
+                                      left: 300.h,
                                       bottom: 17.v,
                                     ),
                                     child: _buildNumbersTwo(
@@ -655,15 +656,21 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                       children: [
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                              MainAxisAlignment.start,
+                                              
                                           children: [
-                                            Text(
-                                              kazanPlayer[0].toString(),
-                                              style: theme.textTheme.labelLarge,
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 173.h),
+                                              child: Text(
+                                                kazanPlayer[0].toString(),
+                                                style:
+                                                    theme.textTheme.labelLarge,
+                                              ),
                                             ),
                                             Padding(
                                               padding:
-                                                  EdgeInsets.only(left: 54.h),
+                                                  EdgeInsets.only(left: 75.h),
                                               child: Text(
                                                 kazanPlayer[1].toString(),
                                                 style:
@@ -684,7 +691,8 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                           alignment: Alignment.topCenter,
                           child: Padding(
                             padding: EdgeInsets.only(
-                              left: 125.h,
+                              left: 41.h,
+                              right: 41.h,
                               bottom: 592.v,
                             ),
                             child: Row(
@@ -738,7 +746,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
 
   /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
+    return CustomAppBar2(
       leadingWidth: double.maxFinite,
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgVuesaxOutlineArrowLeft,
@@ -848,7 +856,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
           nine,
           textAlign: TextAlign.center,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: appTheme.black900.withOpacity(0.8),
+            color: appTheme.black901.withOpacity(0.8),
           ),
         ),
         SizedBox(height: 41.v),
@@ -856,7 +864,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
           nine1,
           textAlign: TextAlign.center,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: appTheme.black900.withOpacity(0.8),
+            color: appTheme.black901.withOpacity(0.8),
           ),
         ),
         SizedBox(height: 41.v),
@@ -864,7 +872,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
           nine2,
           textAlign: TextAlign.center,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: appTheme.black900.withOpacity(0.8),
+            color: appTheme.black901.withOpacity(0.8),
           ),
         ),
         SizedBox(height: 41.v),
@@ -872,7 +880,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
           nine3,
           textAlign: TextAlign.center,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: appTheme.black900.withOpacity(0.8),
+            color: appTheme.black901.withOpacity(0.8),
           ),
         ),
         SizedBox(height: 42.v),
@@ -880,7 +888,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
           nine4,
           textAlign: TextAlign.center,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: appTheme.black900.withOpacity(0.8),
+            color: appTheme.black901.withOpacity(0.8),
           ),
         ),
         SizedBox(height: 41.v),
@@ -888,7 +896,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
           nine5,
           textAlign: TextAlign.center,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: appTheme.black900.withOpacity(0.8),
+            color: appTheme.black901.withOpacity(0.8),
           ),
         ),
         SizedBox(height: 40.v),
@@ -896,7 +904,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
           nine6,
           textAlign: TextAlign.center,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: appTheme.black900.withOpacity(0.8),
+            color: appTheme.black901.withOpacity(0.8),
           ),
         ),
         SizedBox(height: 41.v),
@@ -904,7 +912,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
           nine7,
           textAlign: TextAlign.center,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: appTheme.black900.withOpacity(0.8),
+            color: appTheme.black901.withOpacity(0.8),
           ),
         ),
         SizedBox(height: 41.v),
@@ -912,7 +920,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
           nine8,
           textAlign: TextAlign.center,
           style: theme.textTheme.labelLarge!.copyWith(
-            color: appTheme.black900.withOpacity(0.8),
+            color: appTheme.black901.withOpacity(0.8),
           ),
         ),
       ],
@@ -925,36 +933,33 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
     required String player,
     required String levelCounter,
   }) {
-    return Transform(
-      transform: Matrix4.rotationZ(pi / 2),
-      child: Column(
-        children: [
-          CustomImageView(
-            imagePath: player == 'Player'
-                ? ImageConstant.imgPlayer
-                : ImageConstant.imgAi,
-            height: 66.adaptSize,
-            width: 66.adaptSize,
-            radius: BorderRadius.circular(
-              33.h,
-            ),
+    return Column(
+      children: [
+        CustomImageView(
+          imagePath: player == 'Player'
+              ? ImageConstant.imgPlayer
+              : ImageConstant.imgAi,
+          height: 66.adaptSize,
+          width: 66.adaptSize,
+          radius: BorderRadius.circular(
+            33.h,
           ),
-          SizedBox(height: 4.v),
-          Text(
-            player,
-            style: theme.textTheme.titleMedium!.copyWith(
-              color: appTheme.whiteA700,
-            ),
+        ),
+        SizedBox(height: 4.v),
+        Text(
+          player,
+          style: theme.textTheme.titleMedium!.copyWith(
+            color: appTheme.whiteA700,
           ),
-          SizedBox(height: 2.v),
-          Text(
-            levelCounter,
-            style: CustomTextStyles.bodySmall12.copyWith(
-              color: appTheme.gray300,
-            ),
+        ),
+        SizedBox(height: 2.v),
+        Text(
+          levelCounter,
+          style: CustomTextStyles.bodySmall12.copyWith(
+            color: appTheme.gray300,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
