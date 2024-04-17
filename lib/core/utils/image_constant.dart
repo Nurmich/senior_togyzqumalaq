@@ -75,9 +75,9 @@ class ImageConstant {
 
   static String imgRectangle556 = '$imagePath/img_rectangle_556.png';
 
-  static String imgBalls = '$imagePath/img_balls.svg';
+  // static String imgBalls = '$imagePath/img_balls.svg';
 
-  static String imgBall = '$imagePath/black_5.svg';
+  static String imgBall = '$imagePath/img_ball.png';
 
   static String imgAi = '$imagePath/img_robot.png';
 
