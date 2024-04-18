@@ -5,12 +5,19 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat"),
+        title: Text(
+          "Chat",
+          style: TextStyle(
+            fontSize: 24,
+            color: Colors.white, // Set the text color to white
+          ),
+        ),
         automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFFC57941),
       ),
       body: Center(
         child: Text(
-          "Welcome to the Chat Page!",
+          "This page will be available soon!",
           style: TextStyle(fontSize: 24),
         ),
       ),
