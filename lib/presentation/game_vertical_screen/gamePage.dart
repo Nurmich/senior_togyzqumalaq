@@ -397,12 +397,14 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0XFFC57941),
-      appBar: _buildAppBar(context),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       body: SizedBox(
         width: SizeUtils.width,
         child: SingleChildScrollView(
           child: SizedBox(
-            height: 925.v,
+            height: 872.v,
             width: double.maxFinite,
             child: Stack(
               alignment: Alignment.bottomRight,
@@ -738,17 +740,6 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar2(
-      leadingWidth: double.maxFinite,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgVuesaxOutlineArrowLeft,
-        margin: EdgeInsets.fromLTRB(24.h, 16.v, 342.h, 16.v),
       ),
     );
   }

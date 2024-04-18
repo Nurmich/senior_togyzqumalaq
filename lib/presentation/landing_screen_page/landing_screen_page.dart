@@ -14,31 +14,10 @@ class LandingScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        leadingWidth:
-            69.h, // Adjust if necessary to fit the AppBar aesthetically
-        actions: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 30.h, // Adjust the size as needed
-                height: 30.h, // Adjust the size as needed
-                margin: EdgeInsets.only(
-                    right: 0.h,
-                    top: 10.h), // Adds space between the image and the text
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgEllipse4,
-                ),
-              ),
-              AppbarTitle(
-                text: "Username",
-                margin: EdgeInsets.fromLTRB(5.h, 10.v, 25.h, 0.v),
-                style: TextStyle(fontSize: 40),
-              ),
-            ],
-          ),
-        ],
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFFC57941),
+        title: Text("Username"),
       ),
       body: Container(
         width: double.maxFinite,
