@@ -13,7 +13,6 @@ class TogyzQumalaqGame extends StatelessWidget {
   Widget build(BuildContext context) {
     // Properly initializing the board with necessary parameters
     return Scaffold(
-      appBar: AppBar(title: Text("Game")),
       body: TogyzQumalaqBoard(
           difficulty: 1), // Ensure this widget is set up correctly
     );
@@ -403,7 +402,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
         width: SizeUtils.width,
         child: SingleChildScrollView(
           child: SizedBox(
-            height: 735.v,
+            height: 925.v,
             width: double.maxFinite,
             child: Stack(
               alignment: Alignment.bottomRight,
@@ -472,8 +471,8 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                       width: 52.h,
                                       margin: EdgeInsets.only(right: 145.h),
                                       decoration: BoxDecoration(
-                                        
-                                        color: appTheme.black901.withOpacity(0.1),
+                                        color:
+                                            appTheme.black901.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(
                                           15.h,
                                         ),
@@ -657,7 +656,6 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
-                                              
                                           children: [
                                             Padding(
                                               padding:

@@ -5,6 +5,10 @@ import '../presentation/login_screen/login_screen.dart';
 import '../presentation/landing_screen_container_screen/landing_screen_container_screen.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
 import '../presentation/game_vertical_screen/gamePage.dart';
+import '../presentation/discover_screen/discover_page.dart';
+import '../presentation/chat_screen/chat_page.dart';
+import '../presentation/profile_screen/profile_page.dart';
+import '../presentation/statistics_screen/statistics_page.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
@@ -22,12 +26,24 @@ class AppRoutes {
 
   static const String gameVerticalScreen = '/gamePage';
 
+  static const String discoverPage = '/discover_page';
+
+  static const String chatPage = '/chat_page';
+
+  static const String profilePage = '/profile_page';
+
+  static const String statisticsPage = '/statistics_page';
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => SplashScreen(),
     gameVerticalScreen: (context) => TogyzQumalaqGame(),
     createAccountScreen: (context) => CreateAccountScreen(),
     loginScreen: (context) => LoginScreen(),
     landingScreenContainerScreen: (context) => LandingScreenContainerScreen(),
-    appNavigationScreen: (context) => AppNavigationScreen()
+    appNavigationScreen: (context) => AppNavigationScreen(),
+    discoverPage: (context) => DiscoverPage(),
+    chatPage: (context) => ChatPage(),
+    profilePage: (context) => ProfilePage(),
+    statisticsPage: (context) => StatisticsPage(),
   };
 }
