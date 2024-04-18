@@ -9,12 +9,15 @@ import 'drawPage.dart';
 import 'winnerPage.dart';
 
 class TogyzQumalaqGame extends StatelessWidget {
+  final int difficulty;
+
+  TogyzQumalaqGame({Key? key, required this.difficulty}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // Properly initializing the board with necessary parameters
     return Scaffold(
       body: TogyzQumalaqBoard(
-          difficulty: 1), // Ensure this widget is set up correctly
+          difficulty: difficulty), // Ensure this widget is set up correctly
     );
   }
 }
@@ -115,7 +118,6 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
       tuzdyq = List.generate(2, (index) => -1);
     });
   }
-
   void gameEnd() {
     String winnerName;
     if (kazanPlayer[0] > kazanPlayer[1]) {

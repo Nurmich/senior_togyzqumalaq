@@ -36,7 +36,7 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => SplashScreen(),
-    gameVerticalScreen: (context) => TogyzQumalaqGame(),
+    gameVerticalScreen: (context) => TogyzQumalaqGame(difficulty: 1),
     createAccountScreen: (context) => CreateAccountScreen(),
     loginScreen: (context) => LoginScreen(),
     landingScreenContainerScreen: (context) => LandingScreenContainerScreen(),

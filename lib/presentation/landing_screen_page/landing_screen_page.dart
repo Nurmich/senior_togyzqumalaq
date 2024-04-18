@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:nurmukhammed_s_application4/widgets/app_bar/custom_app_bar.dart';
@@ -8,8 +10,140 @@ import 'package:nurmukhammed_s_application4/core/app_export.dart';
 
 import '../game_vertical_screen/gamePage.dart';
 
+class DifficultyButton extends StatelessWidget {
+  final String title;
+  final Color color;
+
+  const DifficultyButton({
+    Key? key,
+    required this.title,
+    required this.color,
+  }) : super(key: key);
+  int getDifficultyLevel() {
+    switch (title) {
+      case 'Easy':
+        return 1;
+      case 'Medium':
+        return 2;
+      case 'Hard':
+        return 3;
+      default:
+        return 1;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40.0,
+      height: 70.0,
+      margin: EdgeInsets.only(left: 65, right: 65, top: 5, bottom: 5),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.transparent, width: 0),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: 10),
+          Container(
+            width: 20.0,
+            height: 20.0,
+            decoration: ShapeDecoration(
+              shape: CircleBorder(side: BorderSide(color: color, width: 1)),
+              color: Colors.white,
+            ),
+            child: IconButton(
+              onPressed: () {
+                int difficulty = getDifficultyLevel();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        TogyzQumalaqGame(difficulty: difficulty),
+                  ),
+                );
+              },
+              focusColor: color,
+              hoverColor: color,
+              icon: Container(),
+              padding: EdgeInsets.zero,
+              constraints: BoxConstraints(),
+              alignment: Alignment.center,
+            ),
+          ),
+          SizedBox(height: 8), // Space between
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+              fontWeight: FontWeight.normal,
+              decoration: TextDecoration.none,
+              fontFamily: 'Poppins',
+            ),
+          ),
+          SizedBox(height: 5),
+        ],
+      ),
+    );
+  }
+}
+
 class LandingScreenPage extends StatelessWidget {
   const LandingScreenPage({Key? key}) : super(key: key);
+  void showCustomDialog(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      barrierColor: Color(0xFFC57941).withOpacity(0.70),
+      transitionDuration: const Duration(milliseconds: 200),
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return Center(
+          child: Wrap(
+            children: [
+              Container(
+                width: MediaQuery.of(buildContext).size.width,
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text(
+                      'Choose difficulty:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        foreground: Paint()
+                          ..style = PaintingStyle.fill
+                          ..color = Colors.white,
+                        decoration: TextDecoration.none,
+                        fontFamily: 'Poppins',
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 28),
+                    DifficultyButton(title: 'Easy', color: Colors.green),
+                    DifficultyButton(title: 'Medium', color: Colors.yellow),
+                    DifficultyButton(title: 'Hard', color: Colors.red),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +166,7 @@ class LandingScreenPage extends StatelessWidget {
             // Offline Section
             GestureDetector(
               onTap: () {
-                // N
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TogyzQumalaqGame()));
+                showCustomDialog(context);
               },
               child: Card(
                 clipBehavior: Clip.antiAlias,
