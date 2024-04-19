@@ -20,6 +20,8 @@ class ImageConstant {
   static String imgGroup7208 = '$imagePath/img_group_7208.png';
 
   static String img61795511Traced = '$imagePath/img_6179551_1_traced.png';
+  static String imgOyu = '$imagePath/img_oyu.png';
+  static String imgEmpty = '$imagePath/img_empty.png';
 
   // Create Account images
   static String img61795511TracedRed400 =
@@ -71,7 +73,7 @@ class ImageConstant {
 
   // Game vertical images
   static String imgVuesaxOutlineArrowLeft =
-      '$imagePath/img_vuesax_outline_arrow_left.svg';
+      '$imagePath/img_vuesax_outline_arrow_left.png';
 
   static String imgRectangle556 = '$imagePath/img_rectangle_556.png';
 

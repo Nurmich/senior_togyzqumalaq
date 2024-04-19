@@ -266,15 +266,18 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
         width: 115.h,
         margin: EdgeInsets.only(left: 5.h, top: 11.v),
         decoration: BoxDecoration(
-          color: tuzdyq[0] != index
-              ? appTheme.black901.withOpacity(0.1)
-              : Color.fromARGB(255, 255, 0, 0),
+          color: appTheme.black901.withOpacity(0.1),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(2.h),
             topRight: Radius.circular(15.h),
             bottomLeft: Radius.circular(15.h),
             bottomRight: Radius.circular(15.h),
           ),
+          
+          image: DecorationImage(
+            image: tuzdyq[0] != index ? AssetImage(ImageConstant.imgEmpty) : AssetImage(ImageConstant.imgOyu),
+            fit: BoxFit.cover,
+            ),
         ),
         child: Stack(
           children: [
@@ -333,15 +336,17 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
         width: 115.h,
         margin: EdgeInsets.only(left: 5.h, top: 11.v),
         decoration: BoxDecoration(
-          color: tuzdyq[1] != index
-              ? appTheme.black901.withOpacity(0.1)
-              : Color.fromARGB(255, 255, 0, 0),
+          color: appTheme.black901.withOpacity(0.1),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(2.h),
             topRight: Radius.circular(15.h),
             bottomLeft: Radius.circular(15.h),
             bottomRight: Radius.circular(15.h),
           ),
+          image: DecorationImage(
+            image: tuzdyq[1] != index ? AssetImage(ImageConstant.imgEmpty) : AssetImage(ImageConstant.imgOyu),
+            fit: BoxFit.cover,
+            ),
         ),
         child: Stack(
           children: [
@@ -376,13 +381,15 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
             ),
             Positioned(
               // Use Positioned to place the text inside the Stack
-              top: 25.v, // Adjust these values based on where you want the text
-              right: 5.h,
+              top: tuzdyq[1] != index ? 25.v : 7.v, // Adjust these values based on where you want the text
+              right: tuzdyq[1] != index ? 5.h : 15.h,
               child: Text(
-                '${pitsPlayer[1][index]}',
+                tuzdyq[1] != index ? '${pitsPlayer[1][index]}' : "Тұздық  ",
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.v, // Adjust font size as needed
+                  color: tuzdyq[1] != index ? Colors.white : Color.fromARGB(255, 0, 0, 0),
+                  
+                  fontSize: tuzdyq[1] != index ? 16.v : 24.v,
+                  fontFamily: 'Cormorant Garamond',
                 ),
               ),
             ),
@@ -402,7 +409,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
         width: SizeUtils.width,
         child: SingleChildScrollView(
           child: SizedBox(
-            height: 925.v,
+            height: 876.v,
             width: double.maxFinite,
             child: Stack(
               alignment: Alignment.bottomRight,
@@ -426,7 +433,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: SizedBox(
-                    height: 735.v,
+                    height: 800.v,
                     width: double.maxFinite,
                     child: Stack(
                       alignment: Alignment.bottomCenter,
@@ -691,7 +698,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                             padding: EdgeInsets.only(
                               left: 41.h,
                               right: 41.h,
-                              bottom: 592.v,
+                              bottom: 560.v,
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
