@@ -1,8 +1,4 @@
 import 'dart:math';
-import 'package:nurmukhammed_s_application4/widgets/app_bar/custom_app_bar.dart';
-import 'package:nurmukhammed_s_application4/widgets/app_bar2/custom_app_bar.dart';
-import 'package:nurmukhammed_s_application4/widgets/app_bar/appbar_leading_image.dart';
-import 'package:nurmukhammed_s_application4/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:nurmukhammed_s_application4/core/app_export.dart';
 import 'drawPage.dart';

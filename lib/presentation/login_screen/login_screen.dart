@@ -235,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> login(BuildContext context) async {
-    var url = Uri.parse('http://77.243.80.52:8000/login/');
+    var url = Uri.parse('http://192.168.0.193/login/');
     try {
       var response = await http.post(
         url,
@@ -246,8 +246,10 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       if (response.statusCode == 200) {
         var token = json.decode(response.body)['access'];
+        print(response);
         print(token);
         await storage.write(key: 'token', value: token);
+        print(storage.read(key: 'token'));
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => onTapButton(context)),
         );

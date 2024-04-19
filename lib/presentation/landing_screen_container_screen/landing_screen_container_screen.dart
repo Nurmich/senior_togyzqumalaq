@@ -5,7 +5,6 @@ import 'package:nurmukhammed_s_application4/presentation/landing_screen_page/lan
 import 'package:nurmukhammed_s_application4/presentation/profile_screen/profile_page.dart';
 import 'package:nurmukhammed_s_application4/presentation/statistics_screen/statistics_page.dart';
 import 'package:nurmukhammed_s_application4/widgets/custom_bottom_bar.dart';
-import 'package:nurmukhammed_s_application4/core/app_export.dart';
 
 // ignore_for_file: must_be_immutable
 class LandingScreenContainerScreen extends StatefulWidget {
