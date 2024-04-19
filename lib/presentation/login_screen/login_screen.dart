@@ -234,6 +234,28 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Future<Map<String, dynamic>> fetchUserData() async {
+    final storage = FlutterSecureStorage();
+    String? token = await storage.read(key: 'token');
+
+    var url = Uri.parse('http://192.168.0.117/users/me');
+    var response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      // Handle errors, throw exception or return an empty map
+      throw Exception('Failed to load user data');
+    }
+  }
+
   Future<void> login(BuildContext context) async {
     var url = Uri.parse('http://192.168.0.117/login/');
     try {
@@ -246,8 +268,22 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       if (response.statusCode == 200) {
         var token = json.decode(response.body)['access'];
-        print(token);
         await storage.write(key: 'token', value: token);
+
+        var userDataResponse = await fetchUserData();
+        var userId = userDataResponse['id'].toString(); // Convert to string
+        var username = userDataResponse['username'];
+        var firstName = userDataResponse['first_name'];
+        var lastName = userDataResponse['last_name'];
+        var userImg = userDataResponse['image'];
+
+        // Save user data to storage with separate keys
+        await storage.write(key: 'userId', value: userId);
+        await storage.write(key: 'username', value: username);
+        await storage.write(key: 'firstName', value: firstName);
+        await storage.write(key: 'lastName', value: lastName);
+        await storage.write(key: 'image', value: userImg);
+
         Navigator.of(context)
             .pushReplacementNamed(AppRoutes.landingScreenContainerScreen);
       } else {

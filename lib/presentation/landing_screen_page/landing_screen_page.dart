@@ -1,13 +1,12 @@
 import 'dart:ui';
-
+import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:nurmukhammed_s_application4/widgets/app_bar/custom_app_bar.dart';
-import 'package:nurmukhammed_s_application4/widgets/app_bar/appbar_leading_image.dart';
-import 'package:nurmukhammed_s_application4/widgets/app_bar/appbar_image.dart';
-import 'package:nurmukhammed_s_application4/widgets/app_bar/appbar_title.dart';
 import 'package:nurmukhammed_s_application4/core/app_export.dart';
 import '../game_vertical_screen/gamePage.dart';
+import '../game_vertical_screen/gameOnline.dart';
 
 class DifficultyButton extends StatelessWidget {
   final String title;
@@ -91,8 +90,141 @@ class DifficultyButton extends StatelessWidget {
   }
 }
 
-class LandingScreenPage extends StatelessWidget {
+class LandingScreenPage extends StatefulWidget {
   const LandingScreenPage({Key? key}) : super(key: key);
+
+  @override
+  _LandingScreenPageState createState() => _LandingScreenPageState();
+}
+
+class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  final Color backgroundColor;
+  final String? userImage;
+
+  const RoundedAppBar({
+    Key? key,
+    required this.title,
+    required this.backgroundColor,
+    this.userImage,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: backgroundColor,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 24, color: Colors.white),
+            ),
+          ),
+          SizedBox(width: 8), // Add spacing between username and user image
+          if (userImage != null) // Check if userImage is not null
+            CircleAvatar(
+              backgroundImage: NetworkImage(userImage!), // Use userImage URL
+            ),
+        ],
+      ),
+      shape: ContinuousRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(50),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+Future<void> showSearchingDialog(BuildContext context) async {
+  showDialog(
+    context: context,
+    barrierDismissible: false, // User must wait for 10 seconds
+    barrierColor: Color(0xFFC57941).withOpacity(0.70),
+    builder: (BuildContext context) {
+      return Dialog(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset(
+                'assets/images/earth.gif',
+                width: 150,
+                height: 150,
+                fit: BoxFit.cover,
+              ), // Replace with Image.network if your GIF is hosted
+              SizedBox(height: 20),
+              Text(
+                "Searching opponents...",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  decoration: TextDecoration.none,
+                  fontFamily: 'Poppins',
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 5),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+  await Future.delayed(Duration(seconds: 7));
+  // After 10 seconds, close the dialog and navigate
+  Navigator.of(context).pop();
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => TogyzQumalaqOnlineGame(),
+    ),
+  );
+}
+
+class _LandingScreenPageState extends State<LandingScreenPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<Map<String, dynamic>> fetchUserData() async {
+    final storage = FlutterSecureStorage();
+    String? token = await storage.read(key: 'token');
+
+    var url = Uri.parse('http://192.168.0.117/users/me');
+    var response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      // Handle errors, throw exception or return an empty map
+      throw Exception('Failed to load user data');
+    }
+  }
+
   void showCustomDialog(BuildContext context) {
     showGeneralDialog(
       context: context,
@@ -146,166 +278,215 @@ class LandingScreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Color(0xFFC57941),
-        title: Text("Username"),
-      ),
-      body: Container(
-        width: double.maxFinite,
-        padding: EdgeInsets.only(
-          left: 50.h,
-          top: 126.v,
-          right: 50.h,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Offline Section
-            GestureDetector(
-              onTap: () {
-                showCustomDialog(context);
-              },
-              child: Card(
-                clipBehavior: Clip.antiAlias,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusStyle.circleBorder12,
-                ),
-                child: Container(
-                  height: 169.v,
-                  width: 315.h,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 2.h,
-                    vertical: 11.v,
+    return FutureBuilder<Map<String, dynamic>>(
+      future: fetchUserData(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Color(0xFFC57941),
+              title: Text('Loading...'),
+            ),
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Color(0xFFC57941),
+              title: Text('Error'),
+            ),
+            body: Center(
+              child: Text('Failed to load user data'),
+            ),
+          );
+        } else {
+          final userData = snapshot.data!;
+          final username = userData['username'];
+          final userImage = userData['image']; // Assuming image URL is provided
+
+          return Scaffold(
+            appBar: RoundedAppBar(
+              title: username,
+              backgroundColor: Color(0xFFC57941),
+              userImage: userImage,
+            ),
+            body: Container(
+              width: double.maxFinite,
+              padding: EdgeInsets.only(
+                left: 50.h,
+                top: 140.v,
+                right: 50.h,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      "Choose game mode",
+                      style: theme.textTheme.titleLarge?.copyWith(fontSize: 28),
+                    ),
                   ),
-                  decoration: AppDecoration.gradientOrangeAToRed.copyWith(
-                    borderRadius: BorderRadiusStyle.circleBorder12,
+
+                  SizedBox(
+                    height: 30.v,
                   ),
-                  child: Stack(
-                    alignment: Alignment.topLeft,
-                    children: [
-                      CustomImageView(
-                        imagePath: ImageConstant.imgArrowLeft,
-                        height: 9.v,
-                        width: 14.h,
-                        alignment: Alignment.bottomLeft,
-                        margin: EdgeInsets.only(
-                          left: 22.h,
-                          bottom: 12.v,
+
+                  // Offline Section
+                  GestureDetector(
+                    onTap: () {
+                      showCustomDialog(context);
+                    },
+                    child: Card(
+                      clipBehavior: Clip.antiAlias,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusStyle.circleBorder12,
+                      ),
+                      child: Container(
+                        height: 169.v,
+                        width: 315.h,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 2.h,
+                          vertical: 11.v,
+                        ),
+                        decoration: AppDecoration.gradientOrangeAToRed.copyWith(
+                          borderRadius: BorderRadiusStyle.circleBorder12,
+                        ),
+                        child: Stack(
+                          alignment: Alignment.topLeft,
+                          children: [
+                            CustomImageView(
+                              imagePath: ImageConstant.imgArrowLeft,
+                              height: 9.v,
+                              width: 14.h,
+                              alignment: Alignment.bottomLeft,
+                              margin: EdgeInsets.only(
+                                left: 22.h,
+                                bottom: 12.v,
+                              ),
+                            ),
+                            Positioned(
+                              left: 22.h,
+                              top: 18.v,
+                              child: Text(
+                                "Offline",
+                                style: theme.textTheme.labelLarge,
+                              ),
+                            ),
+                            Positioned(
+                              top: 45.v,
+                              left: 22.h,
+                              child: SizedBox(
+                                width: 150.h,
+                                child: Text(
+                                  "Dive right into the offline mode and enjoy exciting gameplay against AI opponent",
+                                  maxLines: 4,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: CustomTextStyles.bodySmallWhiteA700,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 22.v,
+                              left: 170.h,
+                              child: CustomImageView(
+                                imagePath: ImageConstant.imgHand1,
+                                height: 100.v,
+                                width: 150.h,
+                                alignment: Alignment.bottomCenter,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Positioned(
-                        left: 22.h,
-                        top: 18.v,
-                        child: Text(
-                          "Offline",
-                          style: theme.textTheme.labelLarge,
-                        ),
-                      ),
-                      Positioned(
-                        top: 45.v,
-                        left: 22.h,
-                        child: SizedBox(
-                          width: 150.h,
-                          child: Text(
-                            "Dive right into the offline mode and enjoy exciting gameplay against AI opponent",
-                            maxLines: 4,
-                            overflow: TextOverflow.ellipsis,
-                            style: CustomTextStyles.bodySmallWhiteA700,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 22.v,
-                        left: 170.h,
-                        child: CustomImageView(
-                          imagePath: ImageConstant.imgHand1,
-                          height: 100.v,
-                          width: 150.h,
-                          alignment: Alignment.bottomCenter,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+
+                  // Spacer between Offline and Online
+                  SizedBox(height: 40.v),
+
+                  // Online Section
+                  GestureDetector(
+                    onTap: () {
+                      showSearchingDialog(context);
+                    },
+                    child: Card(
+                      clipBehavior: Clip.antiAlias,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusStyle.circleBorder12,
+                      ),
+                      child: Container(
+                        height: 169.v,
+                        width: 315.h,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 2.h,
+                          vertical: 11.v,
+                        ),
+                        decoration: AppDecoration.gradientOrangeAToRed.copyWith(
+                          borderRadius: BorderRadiusStyle.circleBorder12,
+                        ),
+                        child: Stack(
+                          alignment: Alignment.topLeft,
+                          children: [
+                            CustomImageView(
+                              imagePath: ImageConstant.imgArrowLeft,
+                              height: 9.v,
+                              width: 14.h,
+                              alignment: Alignment.bottomLeft,
+                              margin: EdgeInsets.only(
+                                left: 22.h,
+                                bottom: 12.v,
+                              ),
+                            ),
+                            Positioned(
+                              left: 22.h,
+                              top: 18.v,
+                              child: Text(
+                                "Online",
+                                style: theme.textTheme.labelLarge,
+                              ),
+                            ),
+                            Positioned(
+                              top: 45.v,
+                              left: 22.h,
+                              child: SizedBox(
+                                width: 150.h,
+                                child: Text(
+                                  "Easily schedule event/games then find like minded players for battle. You up for it?",
+                                  maxLines: 4,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: CustomTextStyles.bodySmallWhiteA700,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 2.v,
+                              left: 170.h,
+                              child: CustomImageView(
+                                imagePath: ImageConstant.imgGlobe1,
+                                height: 139.adaptSize,
+                                width: 139.adaptSize,
+                                alignment: Alignment.centerRight,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 5.v),
+                ],
               ),
             ),
-
-            // Spacer between Offline and Online
-            SizedBox(height: 10.v),
-
-            // Online Section
-            Card(
-              clipBehavior: Clip.antiAlias,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusStyle.circleBorder12,
-              ),
-              child: Container(
-                height: 169.v,
-                width: 315.h,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 2.h,
-                  vertical: 11.v,
-                ),
-                decoration: AppDecoration.gradientOrangeAToRed.copyWith(
-                  borderRadius: BorderRadiusStyle.circleBorder12,
-                ),
-                child: Stack(
-                  alignment: Alignment.topLeft,
-                  children: [
-                    CustomImageView(
-                      imagePath: ImageConstant.imgArrowLeft,
-                      height: 9.v,
-                      width: 14.h,
-                      alignment: Alignment.bottomLeft,
-                      margin: EdgeInsets.only(
-                        left: 22.h,
-                        bottom: 12.v,
-                      ),
-                    ),
-                    Positioned(
-                      left: 22.h,
-                      top: 18.v,
-                      child: Text(
-                        "Online",
-                        style: theme.textTheme.labelLarge,
-                      ),
-                    ),
-                    Positioned(
-                      top: 45.v,
-                      left: 22.h,
-                      child: SizedBox(
-                        width: 150.h,
-                        child: Text(
-                          "Easily schedule event/games then find like minded players for battle. You up for it?",
-                          maxLines: 4,
-                          overflow: TextOverflow.ellipsis,
-                          style: CustomTextStyles.bodySmallWhiteA700,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 2.v,
-                      left: 170.h,
-                      child: CustomImageView(
-                        imagePath: ImageConstant.imgGlobe1,
-                        height: 139.adaptSize,
-                        width: 139.adaptSize,
-                        alignment: Alignment.centerRight,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            SizedBox(height: 5.v),
-          ],
-        ),
-      ),
+          );
+        }
+      },
     );
   }
 }

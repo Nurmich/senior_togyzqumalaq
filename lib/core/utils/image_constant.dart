@@ -15,6 +15,8 @@ class ImageConstant {
 
   static String imgUser = '$imagePath/img_user.svg';
 
+  static String imgRules = '$imagePath/img_rules.png';
+
   static String imgTengri1Traced = '$imagePath/img_tengri_1_traced.svg';
 
   static String imgGroup7208 = '$imagePath/img_group_7208.png';
@@ -27,6 +29,10 @@ class ImageConstant {
 
   // Login images
   static String imgGraphics = '$imagePath/img_graphics.png';
+
+  static String imgEmpty = '$imagePath/img_empty.png';
+
+  static String imgOyu = '$imagePath/img_oyu.png';
 
   // Common images
   static String imgUpload = '$imagePath/img_upload.svg';

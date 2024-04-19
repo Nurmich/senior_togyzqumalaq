@@ -6,7 +6,6 @@ import 'package:nurmukhammed_s_application4/presentation/profile_screen/profile_
 import 'package:nurmukhammed_s_application4/presentation/statistics_screen/statistics_page.dart';
 import 'package:nurmukhammed_s_application4/widgets/custom_bottom_bar.dart';
 
-// ignore_for_file: must_be_immutable
 class LandingScreenContainerScreen extends StatefulWidget {
   @override
   _LandingScreenContainerScreenState createState() =>
@@ -38,7 +37,7 @@ class _LandingScreenContainerScreenState
         index: _selectedIndex,
         children: _pages,
       ),
-      bottomNavigationBar: CustomBottomBar(
+      bottomNavigationBar: CurvedBottomNavigationBar(
         selectedIndex: _selectedIndex,
         onChanged: _onItemTapped,
       ),

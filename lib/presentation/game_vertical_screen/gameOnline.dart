@@ -5,15 +5,12 @@ import 'package:nurmukhammed_s_application4/core/app_export.dart';
 import 'drawPage.dart';
 import 'winnerPage.dart';
 
-class TogyzQumalaqGame extends StatelessWidget {
-  final int difficulty;
-  TogyzQumalaqGame({Key? key, required this.difficulty}) : super(key: key);
+class TogyzQumalaqOnlineGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Properly initializing the board with necessary parameters
     return Scaffold(
-      body: TogyzQumalaqBoard(
-          difficulty: difficulty), // Ensure this widget is set up correctly
+      body: TogyzQumalaqBoard(), // Ensure this widget is set up correctly
     );
   }
 }
@@ -198,9 +195,6 @@ class MenuButton extends StatelessWidget {
 }
 
 class TogyzQumalaqBoard extends StatefulWidget {
-  final int difficulty;
-
-  TogyzQumalaqBoard({Key? key, required this.difficulty}) : super(key: key);
   @override
   _TogyzQumalaqBoardState createState() => _TogyzQumalaqBoardState();
 }
@@ -788,12 +782,6 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
     ];
   }
 
-  String GetLevelDifficulty() {
-    if (widget.difficulty == 1) return "Level Easy";
-    if (widget.difficulty == 2) return "Level Medium";
-    return "Level Hard";
-  }
-
   Future<bool> _showExitConfirmationDialog(BuildContext context) async {
     return await showDialog(
           context: context,
@@ -847,6 +835,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
   String? lastName;
   String? userImg;
   String defaultImg = 'http://192.168.0.117/media/users/no-user.png';
+  String fakeImg = 'http://192.168.0.117/media/users/3.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -1043,7 +1032,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                                       (currentPlayer + 1) % 2;
                                                   Future.delayed(
                                                       Duration(
-                                                          milliseconds: 2000),
+                                                          milliseconds: 6000),
                                                       () {
                                                     Map<String, dynamic>
                                                         state_before_move =
@@ -1184,8 +1173,8 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                   ),
                                   _buildFrameThirteen(
                                     context,
-                                    player: "AI Bot",
-                                    levelCounter: GetLevelDifficulty(),
+                                    player: "Kenzhebek",
+                                    levelCounter: "Level 1",
                                   ),
                                 ],
                               ),
@@ -1385,8 +1374,8 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
     return Column(
       children: [
         CustomImageView(
-          imagePath: player == 'AI Bot'
-              ? ImageConstant.imgAi
+          imagePath: player == 'Kenzhebek'
+              ? fakeImg
               : userImg != null
                   ? userImg
                   : defaultImg,

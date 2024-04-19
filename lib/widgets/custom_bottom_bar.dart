@@ -1,46 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-enum BottomBarEnum { Home, Discover, Chat, Profile, Statistics }
-
-class CustomBottomBar extends StatelessWidget {
+class CurvedBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onChanged;
 
-  CustomBottomBar({required this.selectedIndex, required this.onChanged});
+  const CurvedBottomNavigationBar({
+    required this.selectedIndex,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: selectedIndex,
-      onTap: onChanged,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.explore),
-          label: 'Discover',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.chat),
-          label: 'Chat',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.bar_chart),
-          label: 'Statistics',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
-          label: 'Profile',
-        ),
-      ],
-      type: BottomNavigationBarType.fixed,
+    return CurvedNavigationBar(
       backgroundColor: Color(0xFFC57941),
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.white24,
-      showUnselectedLabels: true,
-      showSelectedLabels: true,
+      color: Colors.white,
+      buttonBackgroundColor: Color.fromARGB(255, 229, 229, 229),
+      height: 50,
+      index: selectedIndex,
+      items: <Widget>[
+        Icon(Icons.explore, size: 30),
+        Icon(Icons.chat, size: 30),
+        Icon(Icons.home, size: 30),
+        Icon(Icons.bar_chart, size: 30),
+        Icon(Icons.account_circle, size: 30),
+      ],
+      onTap: onChanged,
     );
   }
 }
