@@ -212,7 +212,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   }
 
   Future<void> register(BuildContext context) async {
-    var url = Uri.parse('http://192.168.0.193/register/');
+    var url = Uri.parse('http://192.168.0.117/register/');
     try {
       var response = await http.post(
         url,
@@ -231,6 +231,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       if (response.statusCode == 201) {
         // Registration successful
         print('Account created successfully');
+        // Navigate to the login screen
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutes.loginScreen, (Route<dynamic> route) => false);
       } else {
         // Error handling
         print('Failed to create account');
@@ -313,7 +316,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   /// Navigates to the landingScreenContainerScreen when the action is triggered.
   onTapButton(BuildContext context) {
     register(context);
-    Navigator.pushNamed(context, AppRoutes.landingScreenContainerScreen);
   }
 
   /// Navigates to the loginScreen when the action is triggered.

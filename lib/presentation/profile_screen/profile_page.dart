@@ -65,7 +65,7 @@ class ProfilePage extends StatelessWidget {
     final storage = FlutterSecureStorage();
     String? token = await storage.read(key: 'token');
 
-    var url = Uri.parse('http://192.168.0.193/userdata/');
+    var url = Uri.parse('http://192.168.0.117/userdata/');
     var response = await http.get(
       url,
       headers: {

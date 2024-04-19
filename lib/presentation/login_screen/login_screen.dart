@@ -235,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> login(BuildContext context) async {
-    var url = Uri.parse('http://192.168.0.193/login/');
+    var url = Uri.parse('http://192.168.0.117/login/');
     try {
       var response = await http.post(
         url,
@@ -246,13 +246,10 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       if (response.statusCode == 200) {
         var token = json.decode(response.body)['access'];
-        print(response);
         print(token);
         await storage.write(key: 'token', value: token);
-        print(storage.read(key: 'token'));
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => onTapButton(context)),
-        );
+        Navigator.of(context)
+            .pushReplacementNamed(AppRoutes.landingScreenContainerScreen);
       } else {
         print('Failed to log in');
         _showErrorDialog(context, 'Failed to log in');
@@ -279,10 +276,6 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
     );
-  }
-
-  onTapButton(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.landingScreenContainerScreen);
   }
 
   onTapTxtDonthaveanaccount(BuildContext context) {

@@ -9,7 +9,7 @@ class StatisticsPage extends StatelessWidget {
   Future<Map<String, dynamic>> fetchStatistics() async {
     final String? token = await storage.read(key: 'token');
     var url = Uri.parse(
-        'http://192.168.0.193/games/stats'); // Replace with actual endpoint
+        'http://192.168.0.117/games/stats'); // Replace with actual endpoint
     var response = await http.get(
       url,
       headers: {

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:nurmukhammed_s_application4/widgets/app_bar/custom_app_bar.dart';
 import 'package:nurmukhammed_s_application4/widgets/app_bar/appbar_leading_image.dart';
 import 'package:nurmukhammed_s_application4/widgets/app_bar/appbar_image.dart';
@@ -149,13 +150,7 @@ class LandingScreenPage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Color(0xFFC57941),
-        title: Text(
-          "Username",
-          style: TextStyle(
-            fontSize: 24,
-            color: Colors.white, // Set the text color to white
-          ),
-        ),
+        title: Text("Username"),
       ),
       body: Container(
         width: double.maxFinite,
