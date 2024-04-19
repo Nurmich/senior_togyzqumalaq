@@ -170,11 +170,7 @@ class LandingScreenPage extends StatelessWidget {
             // Offline Section
             GestureDetector(
               onTap: () {
-                // N
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TogyzQumalaqGame()));
+                showCustomDialog(context);
               },
               child: Card(
                 clipBehavior: Clip.antiAlias,
