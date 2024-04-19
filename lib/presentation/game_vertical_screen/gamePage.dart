@@ -6,7 +6,10 @@ import 'winnerPage.dart';
 
 class TogyzQumalaqGame extends StatelessWidget {
   final int difficulty;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ea7cffa8692a629fac5c9899e924cfe7e51fd7d7
   TogyzQumalaqGame({Key? key, required this.difficulty}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -178,7 +181,82 @@ class TogyzQumalaqBoard extends StatefulWidget {
   @override
   _TogyzQumalaqBoardState createState() => _TogyzQumalaqBoardState();
 }
+class ButtonRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center, 
+      children: [
+        MenuButton(), 
+        SizedBox(width: 20), 
+        ResetButton(), 
+      ],
+    );
+  }
+}
 
+class MenuButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        side: BorderSide(color: Colors.yellow, width: 1), // Border color and width
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), // Adjust the corner radius if needed
+        ),
+        maximumSize: Size(40, 30),
+      ),
+      onPressed: () {
+        // Your logic here
+      },
+      child: FittedBox(
+        child: Text(
+            'Main Menu',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+              fontWeight: FontWeight.normal,
+              decoration: TextDecoration.none,
+              fontFamily: 'Poppins',
+            ),
+        ),
+      ),
+    );
+  }
+}
+class ResetButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        side: BorderSide(color: Colors.red, width: 1), // Border color and width
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), // Adjust the corner radius if needed
+        ),
+        maximumSize: Size(40, 30),
+      ),
+      onPressed: () {
+        // Your logic here
+      },
+      child: FittedBox(
+        child: Text(
+            'Reset Game',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+              fontWeight: FontWeight.normal,
+              decoration: TextDecoration.none,
+              fontFamily: 'Poppins',
+            ),
+        ),
+      ),
+    );
+  }
+}
 class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
   void showCustomDialog(BuildContext context) {
     showGeneralDialog(
@@ -666,6 +744,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                       for (int i = 0; i < 9; i++)
                                         GestureDetector(
                                           onTap: () {
+                                            showCustomDialog(context); //HERERERERW
                                             if (currentPlayer == 0 &&
                                                 pitsPlayer[currentPlayer][i] >
                                                     0) {

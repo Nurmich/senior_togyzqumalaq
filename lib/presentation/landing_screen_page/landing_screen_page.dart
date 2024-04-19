@@ -142,7 +142,10 @@ class LandingScreenPage extends StatelessWidget {
       },
     );
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ea7cffa8692a629fac5c9899e924cfe7e51fd7d7
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -171,7 +174,11 @@ class LandingScreenPage extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 showCustomDialog(context);
+<<<<<<< HEAD
               },
+=======
+             },
+>>>>>>> ea7cffa8692a629fac5c9899e924cfe7e51fd7d7
               child: Card(
                 clipBehavior: Clip.antiAlias,
                 elevation: 0,
