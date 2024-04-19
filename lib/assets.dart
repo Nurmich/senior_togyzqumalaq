@@ -14,6 +14,7 @@ class AssetsImages {
   static const imgEllipse_1Png = 'assets/images/img_ellipse_1.png';
   static const imgEllipse_2Png = 'assets/images/img_ellipse_2.png';
   static const imgEllipse_4Png = 'assets/images/img_ellipse_4.png';
+  static const imgEmptyPng = 'assets/images/img_empty.png';
   static const imgFacebookSvg = 'assets/images/img_facebook.svg';
   static const imgGlobe_1Png = 'assets/images/img_globe_1.png';
   static const imgGraphicsPng = 'assets/images/img_graphics.png';
@@ -29,12 +30,14 @@ class AssetsImages {
   static const imgNavChatSvg = 'assets/images/img_nav_chat.svg';
   static const imgNavDiscoverSvg = 'assets/images/img_nav_discover.svg';
   static const imgNavStatisticsSvg = 'assets/images/img_nav_statistics.svg';
+  static const imgOyuPng = 'assets/images/img_oyu.png';
   static const imgProfilePictureWebp = 'assets/images/img_profilePicture.webp';
   static const imgRectangle_556Png = 'assets/images/img_rectangle_556.png';
   static const imgRobotPng = 'assets/images/img_robot.png';
   static const imgTengri_1TracedSvg = 'assets/images/img_tengri_1_traced.svg';
   static const imgUploadSvg = 'assets/images/img_upload.svg';
   static const imgUserSvg = 'assets/images/img_user.svg';
+  static const imgVuesaxOutlineArrowLeftPng = 'assets/images/img_vuesax_outline_arrow_left.png';
   static const imgVuesaxOutlineArrowLeftSvg = 'assets/images/img_vuesax_outline_arrow_left.svg';
   static const imgZhibekPng = 'assets/images/img_zhibek.png';
   static const img_6179551_1TracedPng = 'assets/images/img_6179551_1_traced.png';
