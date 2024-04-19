@@ -99,7 +99,82 @@ class TogyzKumalakAI {
     return score;
   }
 }
+class ButtonRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center, 
+      children: [
+        MenuButton(), 
+        SizedBox(width: 20), 
+        ResetButton(), 
+      ],
+    );
+  }
+}
 
+class MenuButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        side: BorderSide(color: Colors.yellow, width: 1), // Border color and width
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), // Adjust the corner radius if needed
+        ),
+        maximumSize: Size(40, 30),
+      ),
+      onPressed: () {
+        // Your logic here
+      },
+      child: FittedBox(
+        child: Text(
+            'Main Menu',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+              fontWeight: FontWeight.normal,
+              decoration: TextDecoration.none,
+              fontFamily: 'Poppins',
+            ),
+        ),
+      ),
+    );
+  }
+}
+class ResetButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        side: BorderSide(color: Colors.red, width: 1), // Border color and width
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), // Adjust the corner radius if needed
+        ),
+        maximumSize: Size(40, 30),
+      ),
+      onPressed: () {
+        // Your logic here
+      },
+      child: FittedBox(
+        child: Text(
+            'Reset Game',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+              fontWeight: FontWeight.normal,
+              decoration: TextDecoration.none,
+              fontFamily: 'Poppins',
+            ),
+        ),
+      ),
+    );
+  }
+}
 class TogyzQumalaqBoard extends StatefulWidget {
   final int difficulty;
 
@@ -109,6 +184,54 @@ class TogyzQumalaqBoard extends StatefulWidget {
 }
 
 class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
+  void showCustomDialog(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      barrierColor: Color(0xFFC57941).withOpacity(0.70),
+      transitionDuration: const Duration(milliseconds: 200),
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return Center(
+          child: Wrap(
+            children: [
+              Container(
+                width: MediaQuery.of(buildContext).size.width,
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text(
+                      'You Won!',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        foreground: Paint()
+                          ..style = PaintingStyle.fill
+                          ..color = Colors.green,
+                        decoration: TextDecoration.none,
+                        fontFamily: 'Poppins',
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 28),
+                    ButtonRow(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
   void resetGame() {
     setState(() {
       // Reset all game-related variables to their initial state
@@ -135,7 +258,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
           MaterialPageRoute(
               builder: (context) => WinnerPage(winnerName, resetGame)));
   }
-
+  
   void checkMoves() {
     bool end = true;
     for (int i = 0; i < 9; i++) {
@@ -562,6 +685,7 @@ class _TogyzQumalaqBoardState extends State<TogyzQumalaqBoard> {
                                                   state_before_move['pits'];
                                               // Call your game logic function
                                               // After the move, toggle the currentPlayer
+                                              showCustomDialog(context); //HERERERERW
                                               if (kazanPlayer[0] > 81 ||
                                                   kazanPlayer[1] > 81)
                                                 gameEnd();
